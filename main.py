@@ -35,12 +35,12 @@ def song_search():
     song_uris = []
     for i in range(len(song_titles)):
         song_search_string = f'track: {song_titles[i]} year: {year}'
+        result = sp.search(q=song_search_string)
         try:
-            result = sp.search(q=song_search_string)
+            song_uri = result['tracks']['items'][0]['uri']
         except IndexError:
             print(f'{song_titles[i]} not found.')
         else:
-            song_uri = result['tracks']['items'][0]['uri']
             song_uris.append(song_uri)
     return song_uris
 
